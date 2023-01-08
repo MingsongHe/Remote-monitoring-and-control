@@ -1,0 +1,676 @@
+<!doctype html>
+<html>
+<head>
+   <title>EMS IOT</title>
+   <link rel="stylesheet" type="text/css" href='../static/style.css'/>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 提高电脑，手机 移动装置显示位置兼容性 -->
+   <script src="https://code.jquery.com/jquery-3.5.0.js"></script> <!--没有这个文件，JavaScript 功能可能失效-->
+
+<script>
+      if ("{{e_message}}"!== ""){
+              alert("{{e_message}}\r\n{{c_message}}\r\n{{datetime}} \r\nPress 'OK' to continue(按 '确定' 继续)");
+      }
+</script>
+
+<style>
+</style>
+</head>
+
+<body>
+<div id= "container" class="container" style="position:relative;top:20px;">
+
+    <div class="header">
+    </div>
+    <!--end header -->
+
+    <div class="sidebarn">
+    <!--
+    <h4 align="center"><font color="red">EMS SUNLIGHT SERVICE</font></h4>
+    <h5 align="center"><font color="red">SINGAPORE</font></h5>
+    <h5 align="center"><font color="red">（伊麦阳光服务公司）</font></h5>
+    <hr/>
+-->
+<!--    <div id='follow_up_cam_sb'align="center" style="position:relative;top:5px;">
+    <img src="{{ url_for('video_feed_usb') }}" width="120" height="90" style="border:2px solid #deb887">
+    <h5 align="center"><font color="red">MOVING CAMERA</font></h5>
+    </div>
+    <hr/>-->
+    <!-- end .sidebarn --></div>
+
+   <div class="sidebar1">
+   <div id="sidebar_right_general" align="center" style="position:relative;background-color: #93a5c4;top:8px;right:15px">
+
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_1" style="color: #ffff00;">CAMERA</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camup' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='camleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='camstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='camright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camdown' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_p_1" style="color: #ffff00;">CAMERA PLATFORM</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleyforward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='trolleyleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='trolleystop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='trolleyright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleybackward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;" colspan="7"></td>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+<td style="text-align: center;" colspan="5"><strong><span id = "text_object_m_1" style="color: #ffff00;">OBJECT MOVEMENT</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='platformc' class="btn btn-md btn-primary glyphicon glyphicon-download"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformcc' class="btn btn-md btn-primary glyphicon glyphicon-upload"></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="7"><hr/></td>
+</tr>
+</tbody>
+</table>
+
+   <table>
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_h_lighter_1" style="color: #ffff00;">H/LIGHTER</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_lighters_1" style="color: #ffff00;">LIGHTERS</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="9">&nbsp;</td>
+   </tr>
+   </tbody>
+   </table>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_heater_1" style="color: #ffff00;">HEATER</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_delivery_1" style="color: #ffff00;">DELIVERY</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="9"><hr/></td>
+</tr>
+</tbody>
+</table>
+<a id = "exit_page_1" href="/"><font color="#ffff00">Exit the page safely</font></a>
+
+     </div><!-- end .sidebar_right_general -->
+
+<div id="sidebar_right_pc" align="center" style="position:relative;background-color: #93a5c4;top:8px;right:15px">
+
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_2" style="color: #ffff00;">CAMERA</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camup_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='camleft_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camright_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camdown_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_p_2" style="color: #ffff00;">CAMERA PLATFORM</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleyforward_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='trolleyleft_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleyright_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleybackward_pc' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;" colspan="7"></td>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+<td style="text-align: center;" colspan="5"><strong><span id = "text_object_m_2" style="color: #ffff00;">OBJECT MOVEMENT</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='platformc_pc' class="btn btn-md btn-primary glyphicon glyphicon-download"></button></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><button id='platformcc_pc' class="btn btn-md btn-primary glyphicon glyphicon-upload"></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="7"><hr/></td>
+</tr>
+</tbody>
+</table>
+
+   <table>
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_h_lighter_2" style="color: #ffff00;">H/LIGHTER</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_lighters_2" style="color: #ffff00;">LIGHTERS</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="9">&nbsp;</td>
+   </tr>
+   </tbody>
+   </table>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_heater_2" style="color: #ffff00;">HEATER</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_delivery_2" style="color: #ffff00;">DELIVERY</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="9"><hr/></td>
+</tr>
+</tbody>
+</table>
+<a id = "exit_page_2" href="/"><font color="#ffff00">Exit the page safely</font></a>
+     </div><!-- end sidebar_right_pc -->
+     </div><!-- end sidebar1 -->
+
+     <div class="content">
+
+       <div id='side_cam' class="img-video" align="center" style="position:relative;top:5px">
+          <img src="{{ url_for('video_feed') }}" width=90% height=90% style="border:2px solid #deb887">
+       </div>
+
+       <div id='follow_up_cam' class="img-video" align="center" style="position:relative;top:5px;">
+          <img src="{{ url_for('video_feed_usb') }}" width=90% height=90% style="border:2px solid #deb887">
+       </div>
+<!--
+       <div id='mobile_cam' class="img-video" align="center" style="position:relative;top:5px;">
+          <iframe   name="frameMobilphone"   src="http://192.168.1.124:8081" width="800" height="574" style="border:2px solid #deb887"></iframe>
+       </div>
+
+       <div id='mobile_cam_mute' class="img-video" align="center" style="position:relative;top:5px;">
+          <iframe   name="frameMobilphone"   src="http://192.168.1.124:8081/video" width="800" height="574" style="border:2px solid #deb887"></iframe>
+       </div>
+-->
+        <div align="center" style="position:relative;top:5px">
+        <div class="btn-group">
+        <button id = "side" type="button" class="btn btn-default" onclick="side_camera_Function()">SIDE</button>
+        <button id = "moving" type="button" class="btn btn-default" onclick="moving_camera_Function()">MOVING</button>
+        </div>
+        <div class="btn-group">
+          <button id = "general" type="button" class="btn btn-default" onclick="sidebar_right_general_Function()">GENERAL</button>
+          <button id = "pc" type="button" class="btn btn-default" onclick="sidebar_right_pc_Function()">PC</button>
+        </div>
+        <div class="btn-group">
+          <button id = "language_english" type="button" class="btn btn-default">ENGLISH</button>
+          <button id = "language_chinese" type="button" class="btn btn-default">中文</button>
+        </div>
+        <div class="btn-group">
+          <input type="text" onfocus="this.value=''" id="message_box" class="text_field"/>
+          <button id = "post_message" type="button" >传信息</button>
+        </div>
+   </div>
+      </div>
+
+ <!--  end .content -->
+
+     <div class="content2">
+     <div align="center" style="position:relative;top:10px;">
+
+   <table>
+   <tbody>
+   <tr>return "light spot on finish"
+   <td style="text-align: center;" colspan="6">&nbsp</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="2"></td>
+   <td style="text-align: center;" rowspan="2"><table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_3" style="color: #0000ff;">CAMERA</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camup' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='camleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='camstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='camright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camdown' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   </tbody>
+   </table></td>
+   <td style="text-align: center;" rowspan="2"><table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_p_3" style="color: #0000ff;">CAMERA PLATFORM</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleyforward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='trolleyleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='trolleystop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='trolleyright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleybackward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   </tbody>
+   </table>
+   </td>
+<td style="text-align: center;" rowspan="2"><table>
+<tbody>
+<tr>
+<td style="text-align: center;" colspan="7"></td>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+<td style="text-align: center;" colspan="5"><strong><span id = "text_object_m_3" style="color: #0000ff;">OBJECT MOVEMENT</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='platformc' class="btn btn-md btn-primary glyphicon glyphicon-download"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformcc' class="btn btn-md btn-primary glyphicon glyphicon-upload"></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="7"></td>
+</tr>
+</tbody>
+</table>
+</td>
+   <td style="text-align: center;"><table>
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_h_lighter_3" style="color: #0000ff;">H/LIGHTER</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_lighters_3" style="color: #0000ff;">LIGHTERS</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   </tbody>
+   </table></td>
+   <td style="text-align: center;" rowspan="2"></td>
+   </tr>
+   <tr>
+<td style="text-align: center;"><table>
+<tbody>
+<tr>
+<td style="text-align: center;" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_heater_3" style="color: #0000ff;">HEATER</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+<td style="text-align: center;" colspan="3"><strong><span id = "text_delivery_3" style="color: #0000ff;">DELIVERY</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="9"></td>
+</tr>
+</tbody>
+</table></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="6"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+   <a id = "exit_page_3" href="/"><font color="#0000ff">Exit the page safely</font></a>
+        </div>
+      </div>
+      <!-- end .content2 -->
+     <div class="content3">
+     <div align ="center" style="position:relative;top:10px;">
+
+   <table>
+   <tbody>
+   <tr>
+   <td>
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_4" style="color: #0000ff;">CAMERA</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camup' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='camleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='camstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='camright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='camdown' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+  </td>
+  <td>
+   <table class=" aligncenter">
+   <tbody>
+   <tr>
+   <td style="text-align: center;" colspan="5"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><strong><span id = "text_camera_p_4" style="color: #0000ff;">CAMERA PLATFORM</span></strong></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleyforward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-up"></button></td>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;" rowspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='trolleyleft' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-left"></button></td>
+   <td style="text-align: center;"><button id='trolleystop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='trolleyright' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-right"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"></td>
+   <td style="text-align: center;"><button id='trolleybackward' class="btn btn-md btn-primary glyphicon glyphicon-circle-arrow-down"></button></td>
+   <td style="text-align: center;"></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="5"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+  </td>
+     </tr>
+     </tbody>
+     </table>
+
+<table>
+<tbody>
+<tr>
+<td style="text-align: center;" colspan="7"></td>
+</tr>
+<tr>
+<td style="text-align: center;" rowspan="2"></td>
+<td style="text-align: center;" colspan="5"><strong><span id = "text_object_m_4" style="color: #0000ff;">OBJECT MOVEMENT</span></strong></td>
+<td style="text-align: center;" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: center;"><button id='platformc' class="btn btn-md btn-primary glyphicon glyphicon-download"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformstop' class="btn btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;"><button id='platformcc' class="btn btn-md btn-primary glyphicon glyphicon-upload"></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="7"><hr/></td>
+</tr>
+</tbody>
+</table>
+
+   <table>
+   <tbody>
+   <tr>
+   <td>
+   <table>
+   <tbody>
+   <tr>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_h_lighter_4" style="color: #0000ff;">H/LIGHTER</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+   <td style="text-align: center;" colspan="3"><strong><span id = "text_lighters_4" style="color: #0000ff;">LIGHTERS</span></strong></td>
+   <td style="text-align: center;" rowspan="2">&nbsp;</td>
+   </tr>
+   <tr>
+   <td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   <td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+   <td style="text-align: center;">&nbsp;</td>
+   <td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   </tbody>
+   </table>
+   </td>
+   <td>&nbsp;</td>
+    <td>
+    <table>
+    <tbody>
+    <tr>
+    <td style="text-align: center;" rowspan="2"></td>
+    <td style="text-align: center;" colspan="3"><strong><span id = "text_heater_4" style="color: #0000ff;">HEATER</span></strong></td>
+    <td style="text-align: center;" rowspan="2">&nbsp;&nbsp;</td>
+    <td style="text-align: center;" colspan="3"><strong><span id = "text_delivery_4" style="color: #0000ff;">DELIVERY</span></strong></td>
+    <td style="text-align: center;" rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><button id='lightspoton' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+    <td style="text-align: center;">&nbsp;</td>
+    <td style="text-align: center;"><button id='lightspotoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+    <td style="text-align: center;"><button id='lampon' class="btn btn-block btn-md btn-primary glyphicon glyphicon-record"></button></td>
+    <td style="text-align: center;">&nbsp;</td>
+    <td style="text-align: center;"><button id='lampoff' class="btn btn-block btn-md btn-primary glyphicon glyphicon-stop"></button></td>
+    </tr>
+    <tr>
+   <td style="text-align: center;" colspan="9"></td>
+   </tr>
+   </tbody>
+   </table>
+   </td>
+   </tr>
+   <tr>
+   <td style="text-align: center;" colspan="9"><hr/></td>
+   </tr>
+   </tbody>
+   </table>
+   <a id = "exit_page_4" href="/"><font color="#0000ff">Exit the page safely</font></a>
+      </div>
+     </div>
+    </div>
+   </div>
+</body>
+<script src="../static/iot_v50.js" charset="UTF-8"></script>
+</html>

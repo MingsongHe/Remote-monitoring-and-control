@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <!--表示描述文档类型 文档类型mime类型，这里为html,如果JS就是text/javascript，and 页面字符集，编码，eg:gb2312,iso-8859-1,utf-8 Fro SEO-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../static/login.css"/>
+    <title>登录IOT</title>
+<script>
+if ("{{english_message}}"!== ""){ 
+        alert("{{english_message}}\r\n{{chinese_message}}");
+}
+</script>
+<script>
+    <!-- 产生验证码  -->  
+    window.onload = function() {
+        createCode();
+        var timeDiv = document.getElementById("time");
+        window.setInterval(function(){
+            timeDiv.innerHTML = new Date().toLocaleString();
+        }, 1000);
+    };
+    var code; <!-- 在全局定义验证码  --> 
+    function createCode() {
+        code = "";
+        var codeLength = 4; //验证码的长度  
+        var checkCode = document.getElementById("code");
+
+        var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+            'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); <!-- 随机数  -->  
+        for(var i = 0; i < codeLength; i++) { <!-- 循环操作 -->
+            var index = Math.floor(Math.random() * 36); <!-- 取得随机数的索引（0~35） -->
+            code += random[index]; <!-- 根据索引取得随机数加到code上 -->  
+        }
+        checkCode.value = code; <!-- 把code值赋给验证码 -->
+    }
+    
+    function check(){
+    var inputCode = document.getElementById("verifycode").value;
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+        if(username == "" || password==""||inputCode==""){
+            alert("输入信息不能为空,请完善信息！");
+            return false;
+        }else if(inputCode!=code){
+            alert("验证码输入错误,请重新输入！");
+            createCode(); //刷新验证码  
+            document.getElementById("verifycode").value = ""; <!-- 清空文本框  -->
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</head>
+<body>
+
+<div id="login_frame">
+
+    <p id="image_logo"><img src="http://www.ems156.com/wp-content/uploads/2018/03/Logo-220x60.png"></p>
+
+   <form method="post" action="iot" onsubmit="return check()">
+    <!--    <form method="post" action="verify_username_and_password">-->
+        <p><label class="label_input">用户名</label><input type="text" id="username" placeholder="Your name" name="username" class="text_field"/></p>
+        <p><label class="label_input">密码</label><input type="text" id="password" placeholder="Password" name="password" class="text_field" /></p>
+        <p><label class="label_input">验证码</label><input type="text" id="verifycode" name="verifycode" class="text_shortfield" />
+            <input type="text" id="code" name = "code" onclick="createCode()" class="text_minefield"/></p>
+             <div id="login_control">
+             <p><button type="submit">登录</button><a id="alter_passw" style="color:#0000ff;margin-right: 60px;" href="http://192.168.1.172/alter_passw.html">修改密码</a></p>
+             </div>
+    </form>
+</div>
+</body>
+</html>
